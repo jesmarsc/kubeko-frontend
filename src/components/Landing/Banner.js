@@ -22,7 +22,7 @@ const Banner = () => {
         clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%',
       }}
     >
-      <Col lg={10}>
+      <Col xs={16} md={10}>
         <h1>
           <span className={styles.Span}>Kubernetes</span>
           <span className={styles.Span}>Konekt</span>
@@ -32,7 +32,7 @@ const Banner = () => {
           Sign Up
         </Button>
       </Col>
-      <Col lg={10}>
+      <Col xs={16} md={10}>
         <Lottie
           isClickToPauseDisabled={true}
           style={{
