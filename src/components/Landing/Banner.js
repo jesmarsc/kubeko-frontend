@@ -23,16 +23,16 @@ const Banner = () => {
       }}
     >
       <Col xs={16} md={10}>
-        <h1>
+        <h1 className={styles.Header}>
           <span className={styles.Span}>Kubernetes</span>
           <span className={styles.Span}>Konekt</span>
-          <span className={styles.subSpan}>Cloud, Made Simple.</span>
+          <span className={styles.SubSpan}>Cloud, Made Simple.</span>
         </h1>
-        <Button type="primary" size="large" shape="round">
+        <Button type="primary" size="large">
           Sign Up
         </Button>
       </Col>
-      <Col xs={16} md={10}>
+      <Col xs={24} sm={18} md={10}>
         <Lottie
           isClickToPauseDisabled={true}
           style={{
@@ -40,7 +40,6 @@ const Banner = () => {
             height: 'auto',
             maxWidth: '100%',
             maxHeight: '100%',
-            padding: '0px',
           }}
           options={defaultOptions}
         />

@@ -2,13 +2,11 @@
   background-color: #f7f9fa;
   height: 90vh;
   display: flex;
-  flex-wrap: wrap-reverse;
   align-items: center;
-  align-content: center;
   justify-content: center;
 }
 
-h1 {
+.Header {
   font-family: 'Ubuntu';
   color: #202529;
 }
@@ -20,7 +18,7 @@ h1 {
   line-height: 1em;
 }
 
-.subSpan {
+.SubSpan {
   font-size: 2.3vw;
   font-weight: 300;
   display: block;
@@ -28,13 +26,16 @@ h1 {
 }
 
 @media only screen and (max-width: 768px) {
-  h1 {
-    margin-top: -10%;
+  .Row {
+    flex-direction: column-reverse;
+  }
+  .Header {
+    margin-top: -20%;
   }
   .Span {
     font-size: 8vw;
   }
-  .subSpan {
+  .SubSpan {
     font-size: 3vw;
     line-height: 1em;
   }

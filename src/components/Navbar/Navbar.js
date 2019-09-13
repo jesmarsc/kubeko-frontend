@@ -7,18 +7,22 @@ import styles from './Navbar.module.css';
 class Navbar extends Component {
   render() {
     return (
-      <nav>
+      <nav className={styles.navMain}>
         <div className={styles.container}>
-          <ul>
+          <ul className={styles.navMainRight}>
             <li>
-              <Button size="large" type="primary" ghost href="/login">
-                Login
-              </Button>
+              <Link to="/">
+                <Button size="large" type="primary" ghost>
+                  Home
+                </Button>
+              </Link>
             </li>
             <li>
-              <Button size="large" type="primary" href="/dashboard">
-                Dashboard
-              </Button>
+              <Link to="/dashboard">
+                <Button size="large" type="primary">
+                  Dashboard
+                </Button>
+              </Link>
             </li>
           </ul>
         </div>
