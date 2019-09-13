@@ -1,8 +1,7 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Navbar from './components/Navbar/Navbar';
-import Banner from './components/Landing/Banner';
+import Landing from './components/Landing/Landing';
 import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
@@ -11,7 +10,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/dashboard" component={Dashboard} />
-          <Route path="/" component={Banner} />
+          <Route path="/" component={Landing} />
         </Switch>
       </BrowserRouter>
     </Fragment>

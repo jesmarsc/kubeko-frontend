@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
 
-import styles from './Navbar.module.css';
+import styles from './LandingNav.module.css';
 
-class Navbar extends Component {
+class LandingNav extends Component {
   render() {
     return (
       <nav className={styles.navMain}>
@@ -31,4 +31,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+export default LandingNav;

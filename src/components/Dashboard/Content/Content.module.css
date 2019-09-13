@@ -1,0 +1,6 @@
+.container {
+  height: 100%;
+  margin: 8px;
+  background-color: white;
+  display: grid;
+}
