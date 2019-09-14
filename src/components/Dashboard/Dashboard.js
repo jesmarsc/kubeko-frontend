@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './Dashboard.module.css';
 
-import DashboardNav from '../Navbar/DashboardNav';
+import DashboardNav from './Navbar/DashboardNav';
 import SidePanel from './SidePanel/SidePanel';
 import Content from './Content/Content';
 
@@ -27,10 +27,14 @@ class Dashboard extends Component {
   };
   render() {
     return (
-      <div className={styles.Dashboard}>
-        <SidePanel />
-        <div className={styles.column}>
+      <div className={styles.container}>
+        <div className={styles.Sidepanel}>
+          <SidePanel />
+        </div>
+        <div className={styles.NavBar}>
           <DashboardNav />
+        </div>
+        <div className={styles.Content}>
           <Content clusters={this.state.clusters} />
         </div>
       </div>
