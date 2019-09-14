@@ -1,9 +1,9 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { Icon } from 'antd';
 import styles from './SidePanel.module.css';
 
-const SidePanel = () => {
+const SidePanel = props => {
   return (
     <nav className={styles.SidePanel}>
       <div className={styles.LogoContainer}>
@@ -15,7 +15,8 @@ const SidePanel = () => {
           <NavLink
             activeStyle={{ backgroundColor: '#cacaca44' }}
             className={styles.Link}
-            to="/dashboard"
+            to="/"
+            exact
           >
             <span className={styles.SideMenu}>
               <Icon type="branches" />
@@ -25,9 +26,9 @@ const SidePanel = () => {
         </li>
         <li>
           <NavLink
-            activeStyle={{ backgroundColor: '#cacaca' }}
+            activeStyle={{ backgroundColor: '#cacaca44' }}
             className={styles.Link}
-            to="/"
+            to={props.match.url + '/clusters'}
             exact
           >
             <span className={styles.SideMenu}>
@@ -36,9 +37,22 @@ const SidePanel = () => {
             </span>
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            activeStyle={{ backgroundColor: '#cacaca44' }}
+            className={styles.Link}
+            to={props.match.url + '/clusters/new'}
+            exact
+          >
+            <span className={styles.SideMenu}>
+              <Icon type="form" />
+              <span style={{ marginLeft: '16px' }}>Add Cluster</span>
+            </span>
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );
 };
 
-export default SidePanel;
+export default withRouter(SidePanel);

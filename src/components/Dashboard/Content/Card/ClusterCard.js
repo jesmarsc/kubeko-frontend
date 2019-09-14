@@ -6,7 +6,7 @@ const { Meta } = Card;
 const ClusterCard = ({ ip }) => {
   return (
     <Card
-      style={{ width: 300 }}
+      style={{ width: 400 }}
       cover={
         <img
           alt="example"
@@ -15,17 +15,10 @@ const ClusterCard = ({ ip }) => {
       }
       actions={[
         <Icon type="setting" key="setting" />,
-        <Icon type="edit" key="edit" />,
-        <Icon type="ellipsis" key="ellipsis" />,
+        <Icon type="delete" key="ellipsis" />,
       ]}
     >
-      <Meta
-        avatar={
-          <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-        }
-        title={ip}
-        description="This is the description"
-      />
+      <Meta title={ip} description="This is the description." />
     </Card>
   );
 };

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import styles from './Dashboard.module.css';
 
 import DashboardNav from './Navbar/DashboardNav';
@@ -35,7 +36,16 @@ class Dashboard extends Component {
           <DashboardNav />
         </div>
         <div className={styles.Content}>
-          <Content clusters={this.state.clusters} />
+          <Switch>
+            <Route
+              path={this.props.match.url + '/clusters/new'}
+              render={() => <p>NEW FORM</p>}
+            />
+            <Route
+              path={this.props.match.url + '/clusters'}
+              render={() => <Content clusters={this.state.clusters} />}
+            />
+          </Switch>
         </div>
       </div>
     );
