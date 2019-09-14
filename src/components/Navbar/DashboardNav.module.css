@@ -1,10 +1,12 @@
 .nav {
   width: 100%;
-  padding: 16px 0;
+  height: 64px;
   background-color: #f7f9fa;
   border-style: none none solid none;
   border-bottom-color: #cacaca;
   display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .container {

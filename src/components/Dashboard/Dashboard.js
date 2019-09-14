@@ -31,7 +31,7 @@ class Dashboard extends Component {
         <SidePanel />
         <div className={styles.column}>
           <DashboardNav />
-          <Content />
+          <Content clusters={this.state.clusters} />
         </div>
       </div>
     );

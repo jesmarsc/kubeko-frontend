@@ -3,7 +3,7 @@ import { Card, Icon, Avatar } from 'antd';
 
 const { Meta } = Card;
 
-const ClusterCard = () => {
+const ClusterCard = ({ ip }) => {
   return (
     <Card
       style={{ width: 300 }}
@@ -23,7 +23,7 @@ const ClusterCard = () => {
         avatar={
           <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
         }
-        title="Card title"
+        title={ip}
         description="This is the description"
       />
     </Card>

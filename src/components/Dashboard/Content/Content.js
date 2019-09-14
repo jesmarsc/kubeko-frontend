@@ -5,6 +5,9 @@ import styles from './Content.module.css';
 
 export default class Content extends Component {
   render() {
-    return <div className={styles.container}></div>;
+    const clusters = this.props.clusters.map(cluster => (
+      <ClusterCard ip={cluster} />
+    ));
+    return <div className={styles.container}>{clusters}</div>;
   }
 }
