@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import Banner from './Banner';
+import Banner from './Banner/Banner';
 import LandingNav from './Navbar/LandingNav';
 
 const Landing = () => {

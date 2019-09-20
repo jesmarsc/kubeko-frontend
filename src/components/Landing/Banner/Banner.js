@@ -1,7 +1,7 @@
 import React from 'react';
 import { Col, Button } from 'antd';
 import Lottie from 'react-lottie';
-import animation from '../../assets/banner.json';
+import animation from '../../../assets/banner.json';
 
 import styles from './Banner.module.css';
 

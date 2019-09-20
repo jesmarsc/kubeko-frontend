@@ -5,6 +5,7 @@ import styles from './Dashboard.module.css';
 import DashboardNav from './Navbar/DashboardNav';
 import SidePanel from './SidePanel/SidePanel';
 import Content from './Content/Content';
+import NewClusterForm from '../Forms/NewClusterForm';
 
 class Dashboard extends Component {
   state = {
@@ -39,7 +40,7 @@ class Dashboard extends Component {
           <Switch>
             <Route
               path={this.props.match.url + '/clusters/new'}
-              render={() => <p>NEW FORM</p>}
+              component={NewClusterForm}
             />
             <Route
               path={this.props.match.url + '/clusters'}
