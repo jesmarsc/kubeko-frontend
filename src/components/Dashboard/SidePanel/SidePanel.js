@@ -2,14 +2,18 @@ import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Icon } from 'antd';
 import styles from './SidePanel.module.css';
+import { AuthUserContext } from '../../Session';
 
 const SidePanel = props => {
   return (
     <nav className={styles.SidePanel}>
-      <div className={styles.LogoContainer}>
-        <span className={styles.logo}>Hello, Jesmar</span>
-      </div>
-
+      <AuthUserContext.Consumer>
+        {authUser => (
+          <div className={styles.LogoContainer}>
+            <span className={styles.logo}>Hello, {authUser.email}</span>
+          </div>
+        )}
+      </AuthUserContext.Consumer>
       <ul className={styles.SideMenu}>
         <li className={styles.SideMenu}>
           <NavLink

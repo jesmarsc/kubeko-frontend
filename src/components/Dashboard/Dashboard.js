@@ -6,6 +6,7 @@ import DashboardNav from './Navbar/DashboardNav';
 import SidePanel from './SidePanel/SidePanel';
 import Content from './Content/Content';
 import NewClusterForm from '../Forms/NewClusterForm';
+import { withAuthorization } from '../Session';
 
 class Dashboard extends Component {
   state = {
@@ -53,4 +54,5 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+const condition = authUser => !!authUser;
+export default withAuthorization(condition)(Dashboard);
