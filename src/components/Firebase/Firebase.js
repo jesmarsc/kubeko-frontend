@@ -35,6 +35,10 @@ class Firebase {
   user = uid => this.db.ref(`users/${uid}`);
 
   users = () => this.db.ref('users');
+
+  cluser = ip => this.db.ref(`clusers/${ip}`);
+
+  clusters = () => this.db.ref('clusters');
 }
 
 export default Firebase;

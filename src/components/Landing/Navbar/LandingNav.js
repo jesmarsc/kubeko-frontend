@@ -30,13 +30,6 @@ const LandingNavAuth = () => {
           <li>
             <SignOutButton />
           </li>
-          <li>
-            <Link to={ROUTES.ADMIN}>
-              <Button size="large" type="primary">
-                Admin
-              </Button>
-            </Link>
-          </li>
         </ul>
       </div>
     </nav>

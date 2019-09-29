@@ -42,6 +42,10 @@ class SignInFormBase extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  componentWillUnmount() {
+    console.log('UNMOUNTED');
+  }
+
   render() {
     const { email, password, error } = this.state;
     const isInvalid = password === '' || email === '';
