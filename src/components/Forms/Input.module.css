@@ -1,6 +1,6 @@
 .Input {
   width: 100%;
-  padding: 10px;
+  padding: 10px 0px;
   box-sizing: border-box;
 }
 
@@ -24,4 +24,9 @@
 .InputElement:focus {
   outline: none;
   background-color: #ccc;
+}
+
+.Invalid {
+  border: 1px solid red;
+  background-color: rgb(255, 207, 202);
 }
