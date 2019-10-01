@@ -32,7 +32,6 @@ class LoginForm extends React.Component {
         validation: {
           valid: false,
           required: true,
-          minLength: 6,
         },
         touched: false,
       },

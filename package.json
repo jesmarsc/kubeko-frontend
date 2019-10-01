@@ -6,13 +6,15 @@
     "antd": "^3.23.2",
     "axios": "^0.19.0",
     "firebase": "^6.6.2",
+    "formik": "^1.5.8",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-helmet": "^5.2.1",
     "react-lottie": "^1.2.3",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
-    "typeface-ubuntu": "0.0.65"
+    "typeface-ubuntu": "0.0.65",
+    "yup": "^0.27.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
