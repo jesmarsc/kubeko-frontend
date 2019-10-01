@@ -5,6 +5,7 @@ import { withFormik, Form, Field, ErrorMessage } from 'formik';
 import { Button } from 'antd';
 import * as ROUTES from '../../constants/routes';
 import * as Yup from 'yup';
+import styles from './LoginFormik.module.css';
 
 const LoginFormBase = ({ errors, touched, isSubmitting }) => {
   return (
@@ -12,7 +13,10 @@ const LoginFormBase = ({ errors, touched, isSubmitting }) => {
       <div>
         <ErrorMessage name="email" component="div" />
         <Field
-          style={errors.email && touched.email && { border: '1px solid red' }}
+          className={styles.Input}
+          style={
+            errors.email && touched.email && { borderBottom: '2px solid red' }
+          }
           type="email"
           name="email"
           placeholder="Email"
@@ -20,7 +24,16 @@ const LoginFormBase = ({ errors, touched, isSubmitting }) => {
       </div>
       <div>
         <ErrorMessage name="password" component="div" />
-        <Field type="password" name="password" placeholder="Password" />
+        <Field
+          className={styles.Input}
+          style={
+            errors.password &&
+            touched.password && { borderBottom: '2px solid red' }
+          }
+          type="password"
+          name="password"
+          placeholder="Password"
+        />
       </div>
       <Button htmlType="submit" type="primary" block loading={isSubmitting}>
         Submit
