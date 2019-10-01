@@ -1,0 +1,11 @@
+.FormContainer {
+  width: 32vw;
+  padding-top: 30vh;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .FormContainer {
+    width: 90vw;
+  }
+}

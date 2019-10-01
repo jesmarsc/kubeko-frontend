@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Landing from './components/Landing/LandingPage';
 import Dashboard from './components/Dashboard/Dashboard';
 import SignUpPage from './components/SignUp';
-import SignInPage from './components/Forms/LoginFormik';
+import LoginPage from './components/Login/';
 import AdminPage from './components/Admin';
 import { withAuthentication } from './components/Session';
 
@@ -16,7 +16,7 @@ const App = () => (
       <Route path={ROUTES.LANDING} exact component={Landing} />
       <Route path={ROUTES.DASH} component={Dashboard} />
       <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-      <Route path={ROUTES.SIGN_IN} component={SignInPage} />
+      <Route path={ROUTES.SIGN_IN} component={LoginPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
     </Switch>
   </BrowserRouter>

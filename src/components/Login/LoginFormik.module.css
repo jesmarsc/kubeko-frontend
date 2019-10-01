@@ -4,9 +4,13 @@
   margin: 10px 0;
   border: none;
   border-bottom: 2px solid #40a9ff;
-  transition: 0.5s;
+  transition: 0.25s;
 }
 
 .Input:focus {
   outline: 0;
+}
+
+.SubmitButton {
+  margin: 16px 0;
 }
