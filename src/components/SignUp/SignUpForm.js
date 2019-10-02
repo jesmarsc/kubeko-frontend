@@ -5,9 +5,9 @@ import { withFormik, Form, Field, ErrorMessage } from 'formik';
 import { Button } from 'antd';
 import * as ROUTES from '../../constants/routes';
 import * as Yup from 'yup';
-import styles from './LoginFormik.module.css';
+import styles from '../Login/LoginFormik.module.css';
 
-const LoginFormBase = ({ errors, touched, isSubmitting }) => {
+const SignUpFormBase = ({ errors, touched, isSubmitting }) => {
   return (
     <Form>
       <label className={styles.Label}>
@@ -21,7 +21,7 @@ const LoginFormBase = ({ errors, touched, isSubmitting }) => {
           }
           type="email"
           name="email"
-          placeholder="e.g. example@gmail.com"
+          placeholder="example@gmail.com"
         />
         Email
         <ErrorMessage
@@ -30,6 +30,7 @@ const LoginFormBase = ({ errors, touched, isSubmitting }) => {
           component="span"
         />
       </label>
+
       <label className={styles.Label}>
         <Field
           className={styles.Input}
@@ -39,14 +40,35 @@ const LoginFormBase = ({ errors, touched, isSubmitting }) => {
           }
           type="password"
           name="password"
+          placeholder="Must be at least 8 characters long."
         />
         Password
         <ErrorMessage
           style={{ float: 'right' }}
           name="password"
-          component="div"
+          component="span"
         />
       </label>
+
+      <label className={styles.Label}>
+        <Field
+          className={styles.Input}
+          style={
+            errors.confirmPassword &&
+            touched.confirmPassword && { borderBottom: '2px solid red' }
+          }
+          type="password"
+          name="confirmPassword"
+          placeholder="Re-enter your password."
+        />
+        Confirm password
+        <ErrorMessage
+          style={{ float: 'right' }}
+          name="confirmPassword"
+          component="span"
+        />
+      </label>
+
       <ErrorMessage name="submit" component="div" />
       <Button
         name="submit"
@@ -56,7 +78,7 @@ const LoginFormBase = ({ errors, touched, isSubmitting }) => {
         block
         loading={isSubmitting}
       >
-        Log in
+        Sign up
       </Button>
     </Form>
   );
@@ -64,17 +86,19 @@ const LoginFormBase = ({ errors, touched, isSubmitting }) => {
 
 const LoginForm = withFormik({
   handleSubmit(
-    values,
+    { email, password },
     { props, resetForm, setErrors, setTouched, setSubmitting }
   ) {
     setSubmitting(true);
     setTouched({ submit: true });
-
     props.firebase
-      .doSignInWithEmailAndPassword(values.email, values.password)
+      .doCreateUserWithEmailAndPassword(email, password)
+      .then(authUser => {
+        return props.firebase.user(authUser.user.uid).set({ email });
+      })
       .then(() => {
         resetForm();
-        props.history.push(ROUTES.DASH);
+        props.history.push(ROUTES.LANDING);
       })
       .catch(error => {
         setErrors({ submit: error.message });
@@ -88,7 +112,12 @@ const LoginForm = withFormik({
     password: Yup.string()
       .min(8, 'Your password must be atleast 8 characters long.')
       .required('Password is required.'),
+    confirmPassword: Yup.string()
+      .required('Confirmation is required.')
+      .test('confirmPassword', 'Passwords do not match.', function(value) {
+        return this.parent.password === value;
+      }),
   }),
-})(LoginFormBase);
+})(SignUpFormBase);
 
 export default withRouter(withFirebase(LoginForm));

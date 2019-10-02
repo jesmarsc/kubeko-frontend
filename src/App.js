@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Landing from './components/Landing/LandingPage';
 import Dashboard from './components/Dashboard/Dashboard';
 import SignUpPage from './components/SignUp';
-import LoginPage from './components/Login/';
+import LoginPage from './components/Login';
 import AdminPage from './components/Admin';
 import { withAuthentication } from './components/Session';
 

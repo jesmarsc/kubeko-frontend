@@ -1,4 +1,3 @@
-import SignUp, { SignUpLink } from './SignUp';
+import SignUpPage from './SignUpPage';
 
-export default SignUp;
-export { SignUpLink };
+export default SignUpPage;
