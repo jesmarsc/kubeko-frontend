@@ -21,7 +21,6 @@ const LoginFormBase = ({ errors, touched, isSubmitting }) => {
           }
           type="email"
           name="email"
-          placeholder="e.g. example@gmail.com"
         />
         Email
         <ErrorMessage

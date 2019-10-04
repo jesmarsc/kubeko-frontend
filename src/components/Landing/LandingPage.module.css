@@ -1,0 +1,36 @@
+.container {
+  display: grid;
+  grid-template-rows: 90vh repeat(2, min-content);
+  grid-template-columns:
+    [full-start] minmax(6rem, 1fr) [center-start] repeat(
+      8,
+      [col-start] minmax(min-content, 14rem) [col-end]
+    )
+    [center-end] minmax(6rem, 1fr) [full-end];
+}
+
+.header {
+  grid-column: full-start/full-end;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(512px, 1fr));
+  justify-items: center;
+  align-items: center;
+}
+
+.features {
+  background-color: #2f54eb;
+  grid-column: center-start/center-end;
+  padding: 15rem 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 6rem;
+}
+
+.feature {
+  color: white;
+}
+
+.footer {
+  background-color: blanchedalmond;
+  grid-column: full-start/full-end;
+}

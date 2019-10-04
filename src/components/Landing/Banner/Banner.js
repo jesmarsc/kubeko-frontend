@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Col, Button } from 'antd';
 import Lottie from 'react-lottie';
 import animation from '../../../assets/banner.json';
@@ -16,12 +16,7 @@ const Banner = () => {
   };
 
   return (
-    <div
-      className={styles.Row}
-      style={{
-        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%',
-      }}
-    >
+    <div className={styles.Row}>
       <Col xs={16} md={10}>
         <h1 className={styles.Header}>
           <span className={styles.Span}>Kubernetes</span>
@@ -37,7 +32,6 @@ const Banner = () => {
           isClickToPauseDisabled={true}
           style={{
             width: 'auto',
-            height: 'auto',
             maxWidth: '100%',
             maxHeight: '100%',
           }}

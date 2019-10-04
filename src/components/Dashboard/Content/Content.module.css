@@ -6,7 +6,7 @@
   display: grid;
   overflow-y: scroll;
   grid-template-rows: auto auto;
-  grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min-content, 1fr));
   grid-gap: 32px;
   justify-items: center;
 }

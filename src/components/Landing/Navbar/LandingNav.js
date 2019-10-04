@@ -43,14 +43,14 @@ const LandingNavNonAuth = () => {
         <ul className={styles.navMainRight}>
           <li>
             <Link to={ROUTES.SIGN_IN}>
-              <Button size="large" type="primary">
-                Sign In
+              <Button icon="login" size="large" type="ghost">
+                Log in
               </Button>
             </Link>
           </li>
           <li>
             <Link to={ROUTES.SIGN_UP}>
-              <Button size="large" type="primary">
+              <Button icon="form" size="large" type="ghost">
                 Sign Up
               </Button>
             </Link>

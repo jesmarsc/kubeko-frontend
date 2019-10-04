@@ -1,9 +1,18 @@
 .Row {
-  background-color: #f7f9fa;
-  height: 90vh;
+  background-color: transparent;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.Background {
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 0 85%);
+  position: fixed;
+  top: 0;
 }
 
 .Header {

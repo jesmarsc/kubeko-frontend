@@ -1,0 +1,48 @@
+@import '../../variables.scss';
+
+.container {
+  display: grid;
+  grid-template-rows: 100vh;
+  grid-template-columns:
+    [full-start] 1fr [center-start] 14fr
+    [center-end] 1fr [full-end];
+}
+
+.header {
+  grid-column: center-start/center-end;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(33rem, 1fr));
+  justify-items: center;
+  align-items: center;
+  align-content: center;
+  .wrapper {
+    order: 1;
+    .title {
+      display: block;
+      font-size: 9vw;
+      line-height: 1em;
+      font-weight: bold;
+      font-family: 'Ubuntu';
+      color: $text-color-dark;
+    }
+    .subtitle {
+      display: block;
+      font-size: 5.5vw;
+      line-height: 2em;
+    }
+  }
+}
+
+@media (min-width: 755px) {
+  .header {
+    .wrapper {
+      order: 0;
+      .title {
+        font-size: 7vw;
+      }
+      .subtitle {
+        font-size: 2.7vw;
+      }
+    }
+  }
+}

@@ -21,7 +21,6 @@ const SignUpFormBase = ({ errors, touched, isSubmitting }) => {
           }
           type="email"
           name="email"
-          placeholder="example@gmail.com"
         />
         Email
         <ErrorMessage
@@ -40,7 +39,6 @@ const SignUpFormBase = ({ errors, touched, isSubmitting }) => {
           }
           type="password"
           name="password"
-          placeholder="Must be at least 8 characters long."
         />
         Password
         <ErrorMessage
@@ -59,7 +57,6 @@ const SignUpFormBase = ({ errors, touched, isSubmitting }) => {
           }
           type="password"
           name="confirmPassword"
-          placeholder="Re-enter your password."
         />
         Confirm password
         <ErrorMessage
