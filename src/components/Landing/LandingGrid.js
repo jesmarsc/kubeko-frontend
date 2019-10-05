@@ -18,10 +18,11 @@ const Landing = () => {
     <Fragment>
       <Navbar />
       <div className={classes.container}>
+        <div className={classes.background} />
         <header className={classes.header}>
           <div className={classes.wrapper}>
             <span className={classes.title}>Kubernetes Konekt</span>
-            <span className={classes.subtitle}>Cloud, made simple.</span>
+            <span className={classes.subtitle}>Cloud. Made simple.</span>
             <Link to={ROUTES.SIGN_UP}>
               <Button icon="form" shape="round" size="large" type="primary">
                 Sign Up

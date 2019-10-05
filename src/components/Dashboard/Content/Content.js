@@ -8,7 +8,7 @@ export default class Content extends Component {
     let clusters = null;
     if (this.props.clusters) {
       clusters = this.props.clusters.map(cluster => (
-        <ClusterCard ip={cluster} />
+        <ClusterCard ip={cluster} key={cluster} />
       ));
     }
     return <div className={styles.container}>{clusters}</div>;

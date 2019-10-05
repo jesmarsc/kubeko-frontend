@@ -1,15 +1,28 @@
 @import '../../variables.scss';
 
 .container {
+  background-color: whitesmoke;
   display: grid;
   grid-template-rows: 100vh;
   grid-template-columns:
     [full-start] 1fr [center-start] 14fr
     [center-end] 1fr [full-end];
+  background-color: $primary-color;
+}
+
+.background {
+  background-color: white;
+  grid-column: full-start/center-end;
+  grid-row: 1/-1;
+  height: 95%;
+  border-radius: 0 0 128px 0;
+  box-shadow: 7px 7px 7px;
 }
 
 .header {
+  background-color: transparent;
   grid-column: center-start/center-end;
+  grid-row: 1/-1;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(33rem, 1fr));
   justify-items: center;

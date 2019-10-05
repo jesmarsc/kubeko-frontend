@@ -6,7 +6,7 @@ const { Meta } = Card;
 const ClusterCard = ({ ip }) => {
   return (
     <Card
-      style={{ width: 400 }}
+      style={{ width: '100%' }}
       cover={
         <img
           alt="example"
