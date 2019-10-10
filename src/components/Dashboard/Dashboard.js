@@ -6,6 +6,7 @@ import DashboardNav from './Navbar/DashboardNav';
 import SidePanel from './SidePanel/SidePanel';
 import Content from './Content/Content';
 import { withAuthorization } from '../Session';
+import ClusterForm from './ClusterForm';
 
 class Dashboard extends Component {
   state = {
@@ -35,6 +36,10 @@ class Dashboard extends Component {
         </div>
         <div className={styles.Content}>
           <Switch>
+            <Route
+              path={this.props.match.url + '/clusters/new'}
+              component={ClusterForm}
+            />
             <Route
               path={this.props.match.url + '/clusters'}
               render={() => <Content clusters={this.state.clusters} />}

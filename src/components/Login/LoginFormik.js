@@ -43,7 +43,7 @@ const LoginFormBase = ({ errors, touched, isSubmitting }) => {
         <ErrorMessage
           style={{ float: 'right' }}
           name="password"
-          component="div"
+          component="span"
         />
       </label>
       <ErrorMessage name="submit" component="div" />
@@ -62,6 +62,7 @@ const LoginFormBase = ({ errors, touched, isSubmitting }) => {
 };
 
 const LoginForm = withFormik({
+  mapPropsToValues: () => ({ email: '', password: '' }),
   handleSubmit(
     values,
     { props, resetForm, setErrors, setTouched, setSubmitting }
@@ -85,7 +86,7 @@ const LoginForm = withFormik({
       .email('Email must be valid.')
       .required('Email is required.'),
     password: Yup.string()
-      .min(8, 'Your password must be atleast 8 characters long.')
+      .min(8, 'Password must be atleast 8 characters long.')
       .required('Password is required.'),
   }),
 })(LoginFormBase);

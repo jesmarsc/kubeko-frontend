@@ -2,7 +2,7 @@ import React from 'react';
 import { withFirebase } from '../Firebase';
 import { withRouter } from 'react-router-dom';
 import { withFormik, Form, Field, ErrorMessage } from 'formik';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import * as ROUTES from '../../constants/routes';
 import * as Yup from 'yup';
 import styles from '../Login/LoginFormik.module.css';
@@ -82,6 +82,7 @@ const SignUpFormBase = ({ errors, touched, isSubmitting }) => {
 };
 
 const LoginForm = withFormik({
+  mapPropsToValues: () => ({ email: '', password: '', confirmPassword: '' }),
   handleSubmit(
     { email, password },
     { props, resetForm, setErrors, setTouched, setSubmitting }
@@ -92,6 +93,13 @@ const LoginForm = withFormik({
       .doCreateUserWithEmailAndPassword(email, password)
       .then(authUser => {
         return props.firebase.user(authUser.user.uid).set({ email });
+      })
+      .then(() => {
+        props.firebase.doSendEmailVerification();
+        message.info(
+          'A verification email has been sent, please look in your inbox or spam.',
+          10
+        );
       })
       .then(() => {
         resetForm();

@@ -3,7 +3,7 @@ import ClusterCard from './Card/ClusterCard';
 
 import styles from './Content.module.css';
 
-export default class Content extends Component {
+class Content extends Component {
   render() {
     let clusters = null;
     if (this.props.clusters) {
@@ -14,3 +14,5 @@ export default class Content extends Component {
     return <div className={styles.container}>{clusters}</div>;
   }
 }
+
+export default Content;

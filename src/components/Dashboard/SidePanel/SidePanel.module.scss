@@ -1,0 +1,52 @@
+.SidePanel {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 46, 108, 1) 0%,
+    rgba(28, 115, 232, 1) 100%
+  );
+  border-style: none solid none none;
+  border-right-color: #e8e8e8;
+}
+
+.LogoContainer {
+  height: 64px;
+  border-style: none none solid none;
+  border-color: #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+
+  .Logo {
+    color: white;
+    font-size: 2.5rem;
+    font-family: Ubuntu;
+    margin-left: 32px;
+  }
+}
+
+.SideMenu {
+  width: 100%;
+  margin-top: 8px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  .Link {
+    $link-padding: 16px;
+    padding: $link-padding 0;
+
+    &:hover {
+      background-color: #dfdfdf22;
+    }
+
+    .Text {
+      width: 100%;
+      padding: $link-padding 32px;
+      display: inline-block;
+      color: white;
+    }
+  }
+}

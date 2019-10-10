@@ -1,4 +1,4 @@
-import app from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 
@@ -13,9 +13,9 @@ const firebaseConfig = {
 
 class Firebase {
   constructor() {
-    app.initializeApp(firebaseConfig);
-    this.auth = app.auth();
-    this.db = app.database();
+    firebase.initializeApp(firebaseConfig);
+    this.auth = firebase.auth();
+    this.db = firebase.database();
   }
 
   doCreateUserWithEmailAndPassword = (email, password) => {
@@ -32,11 +32,16 @@ class Firebase {
 
   doPasswordUpdate = password => this.auth.currentUser.updatePassword(password);
 
+  doSendEmailVerification = () =>
+    this.auth.currentUser.sendEmailVerification({
+      url: process.env.REACT_APP_CONFIRMATION_EMAIL_REDIRECT,
+    });
+
   user = uid => this.db.ref(`users/${uid}`);
 
   users = () => this.db.ref('users');
 
-  cluser = ip => this.db.ref(`clusers/${ip}`);
+  cluster = ip => this.db.ref(`clusters/${ip}`);
 
   clusters = () => this.db.ref('clusters');
 }
