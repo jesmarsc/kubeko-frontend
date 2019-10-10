@@ -5,7 +5,7 @@ import { withFormik, Form, Field, ErrorMessage } from 'formik';
 import { Button, message } from 'antd';
 import * as ROUTES from '../../constants/routes';
 import * as Yup from 'yup';
-import styles from '../Login/LoginFormik.module.css';
+import styles from '../Forms/Forms.module.scss';
 
 const SignUpFormBase = ({ errors, touched, isSubmitting }) => {
   return (

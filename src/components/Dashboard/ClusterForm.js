@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { withFormik, Form, Field, ErrorMessage } from 'formik';
 import { Button, message } from 'antd';
 import * as Yup from 'yup';
-import styles from '../Login/LoginFormik.module.css';
+import styles from '../Forms/Forms.module.scss';
 
 const ClusterFormBase = ({ errors, touched, isSubmitting }) => {
   return (
