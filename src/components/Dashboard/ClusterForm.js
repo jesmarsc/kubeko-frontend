@@ -4,7 +4,7 @@ import { withVerifiedEmail } from '../Session';
 
 import { withRouter } from 'react-router-dom';
 import { withFormik, Form, Field, ErrorMessage } from 'formik';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import * as Yup from 'yup';
 import styles from '../Login/LoginFormik.module.css';
 
@@ -43,14 +43,29 @@ const ClusterFormBase = ({ errors, touched, isSubmitting }) => {
 
 const ClusterForm = withFormik({
   mapPropsToValues: () => ({ ip: '' }),
-  handleSubmit(
-    values,
-    { props, resetForm, setErrors, setTouched, setSubmitting }
-  ) {
+  handleSubmit(values, { props, resetForm, setTouched, setSubmitting }) {
     setSubmitting(true);
     setTouched({ submit: true });
+
+    const uid = props.firebase.auth.currentUser.uid;
+    const newCluster = props.firebase.clusters().push().key;
+
+    const updates = {};
+    updates[`/users/${uid}/clusters/${newCluster}`] = true;
+    updates[`/clusters/${newCluster}`] = {
+      owner: uid,
+      addr: values.ip,
+    };
+
+    props.firebase.db
+      .ref()
+      .update(updates)
+      .then(() => message.success('Successfully added cluster.', 5))
+      .catch(error => message.error(error.message, 5));
+
     resetForm();
   },
+
   validationSchema: Yup.object().shape({
     ip: Yup.string()
       .matches(

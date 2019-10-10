@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import Landing from './components/Landing/LandingGrid';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -13,15 +13,17 @@ import * as ROUTES from './constants/routes';
 
 const App = () => (
   <Fragment>
-    <Helmet>
-      <meta charSet="utf-8" />
-      <meta
-        name="Description"
-        content="Deploy containers and manage Kubernetes clusters"
-      />
-      <title>Kubernetes Konekt</title>
-      <html lang="en" />
-    </Helmet>
+    <HelmetProvider>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <meta
+          name="Description"
+          content="Deploy containers and manage Kubernetes clusters"
+        />
+        <title>Kubernetes Konekt</title>
+        <html lang="en" />
+      </Helmet>
+    </HelmetProvider>
     <BrowserRouter>
       <Switch>
         <Route path={ROUTES.LANDING} exact component={Landing} />
