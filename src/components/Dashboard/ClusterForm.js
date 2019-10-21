@@ -17,7 +17,7 @@ const ClusterFormBase = ({ errors, touched, isSubmitting }) => {
           style={
             errors.email &&
             touched.email && {
-              borderBottom: '2px solid red',
+              borderBottom: '2px solid red'
             }
           }
           type="text"
@@ -43,9 +43,8 @@ const ClusterFormBase = ({ errors, touched, isSubmitting }) => {
 
 const ClusterForm = withFormik({
   mapPropsToValues: () => ({ ip: '' }),
-  handleSubmit(values, { props, resetForm, setTouched, setSubmitting }) {
+  handleSubmit(values, { props, resetForm, setSubmitting }) {
     setSubmitting(true);
-    setTouched({ submit: true });
 
     const uid = props.firebase.auth.currentUser.uid;
     const newCluster = props.firebase.clusters().push().key;
@@ -54,7 +53,7 @@ const ClusterForm = withFormik({
     updates[`/users/${uid}/clusters/${newCluster}`] = true;
     updates[`/clusters/${newCluster}`] = {
       owner: uid,
-      addr: values.ip,
+      addr: values.ip
     };
 
     props.firebase.db
@@ -72,8 +71,8 @@ const ClusterForm = withFormik({
         /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/,
         'Invalid IP Address.'
       )
-      .required('IP address is required.'),
-  }),
+      .required('IP address is required.')
+  })
 })(ClusterFormBase);
 
 export default withRouter(withFirebase(withVerifiedEmail(ClusterForm)));
