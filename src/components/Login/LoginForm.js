@@ -5,7 +5,7 @@ import { withFormik, Form, Field, ErrorMessage } from 'formik';
 import { Button } from 'antd';
 import * as ROUTES from '../../constants/routes';
 import * as Yup from 'yup';
-import styles from '../Forms/Forms.module.scss';
+import styles from '../../styles/Forms.module.scss';
 
 const LoginFormBase = ({ errors, touched, isSubmitting }) => {
   return (
@@ -16,7 +16,7 @@ const LoginFormBase = ({ errors, touched, isSubmitting }) => {
           style={
             errors.email &&
             touched.email && {
-              borderBottom: '2px solid red',
+              borderBottom: '2px solid red'
             }
           }
           type="email"
@@ -88,8 +88,8 @@ const LoginForm = withFormik({
       .required('Email is required.'),
     password: Yup.string()
       .min(8, 'Password must be atleast 8 characters long.')
-      .required('Password is required.'),
-  }),
+      .required('Password is required.')
+  })
 })(LoginFormBase);
 
 export default withRouter(withFirebase(LoginForm));

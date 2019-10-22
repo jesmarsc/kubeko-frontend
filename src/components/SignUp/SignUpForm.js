@@ -5,7 +5,7 @@ import { withFormik, Form, Field, ErrorMessage } from 'formik';
 import { Button, message } from 'antd';
 import * as ROUTES from '../../constants/routes';
 import * as Yup from 'yup';
-import styles from '../Forms/Forms.module.scss';
+import styles from '../../styles/Forms.module.scss';
 
 const SignUpFormBase = ({ errors, touched, isSubmitting }) => {
   return (
@@ -16,7 +16,7 @@ const SignUpFormBase = ({ errors, touched, isSubmitting }) => {
           style={
             errors.email &&
             touched.email && {
-              borderBottom: '2px solid red',
+              borderBottom: '2px solid red'
             }
           }
           type="email"
@@ -121,8 +121,8 @@ const LoginForm = withFormik({
       .required('Confirmation is required.')
       .test('confirmPassword', 'Passwords do not match.', function(value) {
         return this.parent.password === value;
-      }),
-  }),
+      })
+  })
 })(SignUpFormBase);
 
 export default withRouter(withFirebase(LoginForm));

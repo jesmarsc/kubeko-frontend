@@ -6,8 +6,8 @@ import DashboardNav from './Navbar/DashboardNav';
 import SidePanel from './SidePanel/SidePanel';
 import Content from './Content/Content';
 import { withAuthorization } from '../Session';
-import ClusterForm from './ClusterForm';
-import DeploymentForm from './DeploymentForm';
+import ClusterForm from './Forms/ClusterForm';
+import DeploymentForm from './Forms/DeploymentForm';
 
 class Dashboard extends Component {
   state = {
@@ -16,14 +16,14 @@ class Dashboard extends Component {
       '245.245.245.245',
       '111.111.111.111',
       '456.456.456.456',
-      '123.456.789.123',
+      '123.456.789.123'
     ],
-    collapsed: false,
+    collapsed: false
   };
 
   toggle = () => {
     this.setState({
-      collapsed: !this.state.collapsed,
+      collapsed: !this.state.collapsed
     });
   };
   render() {
