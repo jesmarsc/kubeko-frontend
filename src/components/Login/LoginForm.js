@@ -1,11 +1,12 @@
 import React from 'react';
-import { withFirebase } from '../Firebase';
 import { withRouter } from 'react-router-dom';
 import { withFormik, Form, Field, ErrorMessage } from 'formik';
 import { Button } from 'antd';
-import * as ROUTES from '../../constants/routes';
 import * as Yup from 'yup';
-import styles from '../../styles/Forms.module.scss';
+
+import { withFirebase } from '@firebase-api';
+import * as ROUTES from '@constants/routes';
+import styles from '@styles/Forms.module.scss';
 
 const LoginFormBase = ({ errors, touched, isSubmitting }) => {
   return (

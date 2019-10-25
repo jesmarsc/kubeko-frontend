@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from './Navbar/LandingNav';
-import { Button } from 'antd';
 import Lottie from 'react-lottie';
-import animation from '../../assets/banner.json';
+import { Button } from 'antd';
+
+import Navbar from './Navbar/LandingNav';
 import classes from './LandingPage.module.scss';
-import * as ROUTES from '../../constants/routes';
+import animation from '@assets/banner.json';
+import * as ROUTES from '@constants/routes';
 
 const Landing = () => {
   const defaultOptions = {

@@ -1,7 +1,8 @@
 import React from 'react';
-import AuthUserContext from './AuthUserContext';
 import { Result, Button } from 'antd';
-import { withFirebase } from '../Firebase';
+
+import AuthUserContext from './AuthUserContext';
+import { withFirebase } from '@firebase-api';
 
 const withVerifiedEmail = Component => {
   class WithVerifiedEmail extends React.Component {
@@ -14,13 +15,13 @@ const withVerifiedEmail = Component => {
           this.setState({
             sentEmail: true,
             title:
-              'Email sent, please check your inbox or spam and refresh the page after verifying.',
+              'Email sent, please check your inbox or spam and refresh the page after verifying.'
           })
         )
         .catch(() =>
           this.setState({
             title:
-              'An email has been recently sent, please wait before sending another. Refresh the page after verifying.',
+              'An email has been recently sent, please wait before sending another. Refresh the page after verifying.'
           })
         );
     };

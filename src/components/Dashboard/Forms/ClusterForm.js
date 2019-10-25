@@ -1,12 +1,12 @@
 import React from 'react';
-import { withFirebase } from '../../Firebase';
-import { withVerifiedEmail } from '../../Session';
-
 import { withRouter } from 'react-router-dom';
 import { withFormik, Form, Field, ErrorMessage } from 'formik';
 import { Button, message } from 'antd';
 import * as Yup from 'yup';
-import styles from '../../../styles/Forms.module.scss';
+
+import { withFirebase } from '@firebase-api';
+import { withVerifiedEmail } from '@session';
+import styles from '@styles/Forms.module.scss';
 
 const ClusterFormBase = ({ errors, touched, isSubmitting }) => {
   return (

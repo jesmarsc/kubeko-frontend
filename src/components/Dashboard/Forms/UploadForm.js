@@ -2,7 +2,9 @@ import React from 'react';
 import { Upload, Button, Icon, message } from 'antd';
 import axios from 'axios';
 
-class DeploymentForm extends React.Component {
+import styles from './UploadForm.module.scss';
+
+class UploadForm extends React.Component {
   state = {
     fileList: [],
     uploading: false
@@ -54,24 +56,27 @@ class DeploymentForm extends React.Component {
     };
 
     return (
-      <div>
-        <Upload {...props}>
-          <Button>
-            <Icon type="upload" /> Select File
+      <ul className={styles.Container}>
+        <li>
+          <Button
+            type="primary"
+            onClick={this.handleUpload}
+            disabled={fileList.length === 0}
+            loading={uploading}
+          >
+            {uploading ? 'Uploading' : 'Start Upload'}
           </Button>
-        </Upload>
-        <Button
-          type="primary"
-          onClick={this.handleUpload}
-          disabled={fileList.length === 0}
-          loading={uploading}
-          style={{ marginTop: 16 }}
-        >
-          {uploading ? 'Uploading' : 'Start Upload'}
-        </Button>
-      </div>
+        </li>
+        <li>
+          <Upload {...props}>
+            <Button>
+              <Icon type="upload" /> Select File
+            </Button>
+          </Upload>
+        </li>
+      </ul>
     );
   }
 }
 
-export default DeploymentForm;
+export default UploadForm;

@@ -1,9 +1,9 @@
 import React from 'react';
-import LoginForm from './LoginForm';
 import { Link } from 'react-router-dom';
-import * as ROUTES from '../../constants/routes';
 
-import styles from './LoginPage.module.css';
+import LoginForm from './LoginForm';
+import * as ROUTES from '@constants/routes';
+import styles from '@styles/FormsPage.module.scss';
 
 const LoginPage = () => {
   return (

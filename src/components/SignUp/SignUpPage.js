@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SignUpForm from './SignUpForm';
-import * as ROUTES from '../../constants/routes';
 
-import styles from '../Login/LoginPage.module.css';
+import SignUpForm from './SignUpForm';
+import * as ROUTES from '@constants/routes';
+import styles from '@styles/FormsPage.module.scss';
 
 const SignUpPage = () => {
   return (

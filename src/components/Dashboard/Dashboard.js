@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import styles from './Dashboard.module.css';
 
 import DashboardNav from './Navbar/DashboardNav';
 import SidePanel from './SidePanel/SidePanel';
 import Content from './Content/Content';
-import { withAuthorization } from '../Session';
 import ClusterForm from './Forms/ClusterForm';
-import DeploymentForm from './Forms/DeploymentForm';
+import Clusters from './Lists/Clusters';
+import { withAuthorization } from '@session';
+import styles from './Dashboard.module.css';
 
 class Dashboard extends Component {
   state = {
@@ -39,7 +39,7 @@ class Dashboard extends Component {
           <Switch>
             <Route
               path={this.props.match.url + '/deployments/new'}
-              component={DeploymentForm}
+              component={Clusters}
             />
             <Route
               path={this.props.match.url + '/clusters/new'}

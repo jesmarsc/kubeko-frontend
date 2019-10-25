@@ -1,6 +1,7 @@
 import React from 'react';
-import { withFirebase } from '../Firebase';
 import { Button } from 'antd';
+
+import { withFirebase } from '@firebase-api';
 
 const SignOutButton = ({ firebase }) => {
   return (

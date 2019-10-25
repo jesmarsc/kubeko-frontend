@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'antd';
-import SignOutButton from '../../SignOut';
-import { AuthUserContext } from '../../Session/';
-import * as ROUTES from '../../../constants/routes';
+
+import { AuthUserContext } from '@session';
+import SignOutButton from '@components/SignOut';
+import * as ROUTES from '@constants/routes';
 
 import styles from './LandingNav.module.css';
 
