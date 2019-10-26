@@ -2,6 +2,7 @@ import React from 'react';
 import { Upload, Button, Icon, message } from 'antd';
 import axios from 'axios';
 
+import { withFirebase } from '@firebase-api';
 import styles from './UploadForm.module.scss';
 
 class UploadForm extends React.Component {
@@ -10,48 +11,57 @@ class UploadForm extends React.Component {
     uploading: false
   };
 
-  handleUpload = () => {
+  handleUpload = async () => {
     const { fileList } = this.state;
     const formData = new FormData();
+    formData.append('cid', this.props.cid);
+
     fileList.forEach(file => {
-      formData.append('files[]', file);
+      formData.append(file.name, file);
     });
 
-    this.setState({
-      uploading: true
-    });
+    try {
+      this.setState({ uploading: true });
+      const token = await this.props.firebase.auth.currentUser.getIdToken(true);
 
-    axios
-      .post('https://jsonplaceholder.typicode.com/posts', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      })
-      .then(response => {
-        this.setState({ fileList: [], uploading: false });
-        message.success('Successfully deployed.', 3);
-        console.log(response);
-      })
-      .catch(error => console.log(error.message));
+      await axios.post(
+        'https://us-central1-kubeko.cloudfunctions.net/uploadFile',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
+          }
+        }
+      );
+
+      this.setState({ uploading: false });
+      message.success('Successfully deployed.', 3);
+    } catch (error) {
+      this.setState({ uploading: false });
+      message.error(error.message, 3);
+    }
+  };
+
+  removeFile = file => {
+    this.setState(prevState => {
+      const fileList = [...prevState.fileList];
+      const fileIndex = fileList.indexOf(file);
+      fileList.splice(fileIndex, 1);
+      return { fileList };
+    });
+  };
+
+  beforeUpload = file => {
+    this.setState(prevState => ({ fileList: [...prevState.fileList, file] }));
+    return false;
   };
 
   render() {
     const { uploading, fileList } = this.state;
     const props = {
-      onRemove: file => {
-        this.setState(state => {
-          const index = state.fileList.indexOf(file);
-          const newFileList = state.fileList.slice();
-          newFileList.splice(index, 1);
-          return {
-            fileList: newFileList
-          };
-        });
-      },
-      beforeUpload: file => {
-        this.setState(state => ({
-          fileList: [...state.fileList, file]
-        }));
-        return false;
-      },
+      onRemove: this.removeFile,
+      beforeUpload: this.beforeUpload,
       fileList
     };
 
@@ -61,7 +71,7 @@ class UploadForm extends React.Component {
           <Button
             type="primary"
             onClick={this.handleUpload}
-            disabled={fileList.length === 0}
+            disabled={fileList.length === 0 || !this.props.cid}
             loading={uploading}
           >
             {uploading ? 'Uploading' : 'Start Upload'}
@@ -79,4 +89,4 @@ class UploadForm extends React.Component {
   }
 }
 
-export default UploadForm;
+export default withFirebase(UploadForm);

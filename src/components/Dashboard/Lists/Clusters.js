@@ -35,17 +35,19 @@ class Clusters extends Component {
   }
 
   render() {
+    const { clusters, selectedRowKeys } = this.state;
     const rowSelection = {
-      selectedRowKeys: this.state.selectedRowKeys,
+      selectedRowKeys,
       onChange: this.onSelectedRowKeysChange,
       type: 'radio'
     };
     return (
       <Table
+        style={{ padding: '16px' }}
         rowSelection={rowSelection}
-        dataSource={this.state.clusters}
+        dataSource={clusters}
         onRow={record => ({ onClick: () => this.selectRow(record) })}
-        footer={() => <UploadForm />}
+        footer={() => <UploadForm cid={selectedRowKeys[0]} />}
       >
         <Column title="Address" dataIndex="addr" />
         <Column title="Owner" dataIndex="owner" />
