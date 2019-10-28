@@ -8,7 +8,8 @@ const { Column } = Table;
 class Clusters extends Component {
   state = {
     clusters: [],
-    selectedRowKeys: []
+    selectedRowKeys: [],
+    loading: true
   };
 
   selectRow = record => {
@@ -25,17 +26,18 @@ class Clusters extends Component {
       .once('value')
       .then(snapshot => {
         const value = snapshot.val();
+        if (!value) return;
         const clusters = Object.keys(value).map(key => {
           const { addr, owner } = value[key];
           return { key, addr, owner };
         });
 
-        this.setState({ clusters });
+        this.setState({ clusters, loading: false });
       });
   }
 
   render() {
-    const { clusters, selectedRowKeys } = this.state;
+    const { clusters, selectedRowKeys, loading } = this.state;
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectedRowKeysChange,
@@ -43,10 +45,17 @@ class Clusters extends Component {
     };
     return (
       <Table
-        style={{ padding: '16px' }}
+        size="small"
+        loading={loading}
+        bordered
         rowSelection={rowSelection}
         dataSource={clusters}
         onRow={record => ({ onClick: () => this.selectRow(record) })}
+        title={() => (
+          <span>
+            <strong>New Deployment</strong>
+          </span>
+        )}
         footer={() => <UploadForm cid={selectedRowKeys[0]} />}
       >
         <Column title="Address" dataIndex="addr" />

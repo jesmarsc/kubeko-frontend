@@ -5,9 +5,9 @@ import DashboardNav from './Navbar/DashboardNav';
 import SidePanel from './SidePanel/SidePanel';
 import Content from './Content/Content';
 import ClusterForm from './Forms/ClusterForm';
-import Clusters from './Lists/Clusters';
+import Workloads from './Content/Workloads';
 import { withAuthorization } from '@session';
-import styles from './Dashboard.module.css';
+import styles from './Dashboard.module.scss';
 
 class Dashboard extends Component {
   state = {
@@ -38,8 +38,8 @@ class Dashboard extends Component {
         <div className={styles.Content}>
           <Switch>
             <Route
-              path={this.props.match.url + '/deployments/new'}
-              component={Clusters}
+              path={this.props.match.url + '/deployments'}
+              component={Workloads}
             />
             <Route
               path={this.props.match.url + '/clusters/new'}

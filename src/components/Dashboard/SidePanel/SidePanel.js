@@ -17,7 +17,7 @@ const SidePanel = props => {
           <NavLink
             activeStyle={{ backgroundColor: '#cacaca44' }}
             className={styles.Link}
-            to={props.match.url + '/deployments/new'}
+            to={props.match.url + '/deployments'}
             exact
           >
             <span className={styles.Text}>

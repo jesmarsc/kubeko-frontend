@@ -1,7 +1,9 @@
+@import '@styles/variables.scss';
+
 .container {
   padding: 16px;
-  height: calc(100vh - 64px);
-  width: calc(100vw - 256px);
+  height: calc(100vh - #{$dashboard-nav-height});
+  width: calc(100vw - #{$dashboard-sidepanel-width});
   display: grid;
   overflow-y: scroll;
   grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));

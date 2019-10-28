@@ -1,9 +1,11 @@
+@import '@styles/variables.scss';
+
 .container {
   display: grid;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  grid-template-columns: 256px 1fr;
-  grid-template-rows: 64px 1fr;
+  grid-template-columns: $dashboard-sidepanel-width 1fr;
+  grid-template-rows: $dashboard-nav-height 1fr;
   grid-template-areas: 'Sidepanel Navbar' 'Sidepanel Content';
 }
 

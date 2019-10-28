@@ -35,11 +35,11 @@ class UploadForm extends React.Component {
         }
       );
 
-      this.setState({ uploading: false });
       message.success('Successfully deployed.', 3);
     } catch (error) {
-      this.setState({ uploading: false });
       message.error(error.message, 3);
+    } finally {
+      this.setState({ uploading: false, fileList: [] });
     }
   };
 
