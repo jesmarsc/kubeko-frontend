@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Table } from 'antd';
+import { Table, Collapse, Icon } from 'antd';
 import { withFirebase } from '@firebase-api';
 import UploadForm from '../Forms/UploadForm';
 
+const { Panel } = Collapse;
 const { Column } = Table;
 
 class Clusters extends Component {
@@ -43,24 +44,38 @@ class Clusters extends Component {
       onChange: this.onSelectedRowKeysChange,
       type: 'radio'
     };
+    const customPanel = {
+      background: '#fafafa',
+      border: 0,
+      borderRadius: 16,
+      marginTop: 32,
+      padding: 0
+    };
     return (
-      <Table
-        size="small"
-        loading={loading}
-        bordered
-        rowSelection={rowSelection}
-        dataSource={clusters}
-        onRow={record => ({ onClick: () => this.selectRow(record) })}
-        title={() => (
-          <span>
-            <strong>New Deployment</strong>
-          </span>
-        )}
-        footer={() => <UploadForm cid={selectedRowKeys[0]} />}
+      <Collapse
+        bordered={false}
+        expandIcon={({ isActive }) =>
+          isActive ? (
+            <Icon type="minus-square" theme="filled" />
+          ) : (
+            <Icon type="plus-square" theme="filled" />
+          )
+        }
       >
-        <Column title="Address" dataIndex="addr" />
-        <Column title="Owner" dataIndex="owner" />
-      </Table>
+        <Panel header="New Workload" key="1" style={customPanel}>
+          <Table
+            size="middle"
+            loading={loading}
+            rowSelection={rowSelection}
+            dataSource={clusters}
+            onRow={record => ({ onClick: () => this.selectRow(record) })}
+            footer={() => <UploadForm cid={selectedRowKeys[0]} />}
+          >
+            <Column title="Address" dataIndex="addr" />
+            <Column title="Owner" dataIndex="owner" />
+          </Table>
+        </Panel>
+      </Collapse>
     );
   }
 }
