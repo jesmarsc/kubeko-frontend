@@ -57,6 +57,35 @@ class Deployments extends Component {
     }
   }
 
+  deleteDeploymentHandler = async deploymentIndex => {
+    try {
+      const { deployments } = this.state;
+      const { firebase, cid } = this.props;
+      const token = await firebase.auth.currentUser.getIdToken(true);
+      const uid = firebase.auth.currentUser.uid;
+      const name = deployments[deploymentIndex].name;
+
+      this.setState({ loading: true });
+
+      await axios.delete(
+        `https://us-central1-kubeko.cloudfunctions.net/proxy/clusters/${cid}/apis/apps/v1/namespaces/${uid.toLowerCase()}/deployments/${name}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      this.setState(prevState => {
+        const deployments = [...prevState.deployments];
+        deployments.splice(deploymentIndex, 1);
+        return { deployments };
+      });
+
+      message.success(`Successfully deleted ${name}`, 3);
+    } catch (error) {
+      message.error(error.message, 3);
+    } finally {
+      this.setState({ loading: false });
+    }
+  };
+
   render() {
     const { deployments, loading } = this.state;
     return (
@@ -98,6 +127,18 @@ class Deployments extends Component {
               </Tag>
             ))
           }
+        />
+        <Column
+          title="Actions"
+          key="actions"
+          render={(text, record, deploymentIndex) => (
+            <Button
+              type="link"
+              onClick={() => this.deleteDeploymentHandler(deploymentIndex)}
+            >
+              Delete
+            </Button>
+          )}
         />
       </Table>
     );
