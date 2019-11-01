@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Table, Tag, message } from 'antd';
+import { Table, Tag, Button, message } from 'antd';
 
 import { withFirebase } from '@firebase-api';
 
@@ -44,6 +44,35 @@ class Services extends Component {
       this.setState({ loading: false });
     }
   }
+
+  deleteServiceHandler = async serviceIndex => {
+    try {
+      const { services } = this.state;
+      const { firebase, cid } = this.props;
+      const token = await firebase.auth.currentUser.getIdToken(true);
+      const uid = firebase.auth.currentUser.uid;
+      const name = services[serviceIndex].name;
+
+      this.setState({ loading: true });
+
+      await axios.delete(
+        `https://us-central1-kubeko.cloudfunctions.net/proxy/clusters/${cid}/api/v1/namespaces/${uid.toLowerCase()}/services/${name}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      this.setState(prevState => {
+        const services = [...prevState.services];
+        services.splice(serviceIndex, 1);
+        return { services };
+      });
+
+      message.success(`Successfully deleted ${name}`, 3);
+    } catch (error) {
+      message.error(error.message, 3);
+    } finally {
+      this.setState({ loading: false });
+    }
+  };
 
   render() {
     const { services, loading } = this.state;
@@ -90,6 +119,18 @@ class Services extends Component {
               </Tag>
             ))
           }
+        />
+        <Column
+          title="Actions"
+          key="actions"
+          render={(text, record, serviceIndex) => (
+            <Button
+              type="link"
+              onClick={() => this.deleteServiceHandler(serviceIndex)}
+            >
+              Delete
+            </Button>
+          )}
         />
       </Table>
     );
