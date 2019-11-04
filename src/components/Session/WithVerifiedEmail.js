@@ -8,22 +8,20 @@ const withVerifiedEmail = Component => {
   class WithVerifiedEmail extends React.Component {
     state = { sentEmail: false, title: 'Email must be verified.' };
 
-    sendVerificationEmail = () => {
-      this.props.firebase
-        .doSendEmailVerification()
-        .then(() =>
-          this.setState({
-            sentEmail: true,
-            title:
-              'Email sent, please check your inbox or spam and refresh the page after verifying.'
-          })
-        )
-        .catch(() =>
-          this.setState({
-            title:
-              'An email has been recently sent, please wait before sending another. Refresh the page after verifying.'
-          })
-        );
+    sendVerificationEmail = async () => {
+      try {
+        await this.props.firebase.doSendEmailVerification();
+        this.setState({
+          sentEmail: true,
+          title:
+            'Email sent, please check your inbox or spam and refresh the page after verifying.'
+        });
+      } catch (error) {
+        this.setState({
+          title:
+            'An email has been recently sent, please wait before sending another. Refresh the page after verifying.'
+        });
+      }
     };
 
     render() {

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import LandingPage from './components/Landing';
@@ -31,6 +31,7 @@ const App = () => (
         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
         <Route path={ROUTES.SIGN_IN} component={LoginPage} />
         <Route path={ROUTES.ADMIN} component={AdminPage} />
+        <Redirect path={'/'} to="/" />
       </Switch>
     </BrowserRouter>
   </Fragment>

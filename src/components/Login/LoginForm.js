@@ -74,7 +74,6 @@ const LoginForm = withFormik({
     props.firebase
       .doSignInWithEmailAndPassword(values.email, values.password)
       .then(res => {
-        res.user.getIdToken(true).then(token => console.log(token));
         resetForm();
         props.history.push(ROUTES.DASH);
       })
