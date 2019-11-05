@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { k8sProxy } from '@src/App';
 import { Table, Tag, Button, message } from 'antd';
 
 import { withFirebase } from '@firebase-api';
@@ -9,7 +9,11 @@ const { Column } = Table;
 class Deployments extends Component {
   state = { deployments: [], loading: false };
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.getDeployments();
+  }
+
+  getDeployments = async () => {
     const { firebase, cid } = this.props;
 
     try {
@@ -18,8 +22,8 @@ class Deployments extends Component {
 
       this.setState({ loading: true });
 
-      const response = await axios.get(
-        `https://us-central1-kubeko.cloudfunctions.net/proxy/clusters/${cid}/apis/apps/v1/namespaces/${uid.toLowerCase()}/deployments`,
+      const response = await k8sProxy.get(
+        `/clusters/${cid}/apis/apps/v1/namespaces/${uid.toLowerCase()}/deployments`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const items = response.data.items;
@@ -55,7 +59,7 @@ class Deployments extends Component {
     } finally {
       this.setState({ loading: false });
     }
-  }
+  };
 
   deleteDeploymentHandler = async deploymentIndex => {
     try {
@@ -67,8 +71,8 @@ class Deployments extends Component {
 
       this.setState({ loading: true });
 
-      await axios.delete(
-        `https://us-central1-kubeko.cloudfunctions.net/proxy/clusters/${cid}/apis/apps/v1/namespaces/${uid.toLowerCase()}/deployments/${name}`,
+      await k8sProxy.delete(
+        `/clusters/${cid}/apis/apps/v1/namespaces/${uid.toLowerCase()}/deployments/${name}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 

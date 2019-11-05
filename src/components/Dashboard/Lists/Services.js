@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Table, Tag, Button, message } from 'antd';
 
+import { k8sProxy } from '@src/App';
 import { withFirebase } from '@firebase-api';
 
 const { Column } = Table;
@@ -16,8 +16,8 @@ class Services extends Component {
       const token = await firebase.auth.currentUser.getIdToken(true);
       const uid = firebase.auth.currentUser.uid;
       this.setState({ loading: true });
-      const response = await axios.get(
-        `https://us-central1-kubeko.cloudfunctions.net/proxy/clusters/${cid}/api/v1/namespaces/${uid.toLowerCase()}/services`,
+      const response = await k8sProxy.get(
+        `/clusters/${cid}/api/v1/namespaces/${uid.toLowerCase()}/services`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const items = response.data.items;
@@ -55,8 +55,8 @@ class Services extends Component {
 
       this.setState({ loading: true });
 
-      await axios.delete(
-        `https://us-central1-kubeko.cloudfunctions.net/proxy/clusters/${cid}/api/v1/namespaces/${uid.toLowerCase()}/services/${name}`,
+      await k8sProxy.delete(
+        `/clusters/${cid}/api/v1/namespaces/${uid.toLowerCase()}/services/${name}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 

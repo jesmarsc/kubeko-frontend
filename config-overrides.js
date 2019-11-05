@@ -13,6 +13,7 @@ module.exports = override(
     ['@components']: path.resolve(__dirname, 'src', 'components'),
     ['@firebase-api']: path.resolve(__dirname, 'src', 'components', 'Firebase'),
     ['@session']: path.resolve(__dirname, 'src', 'components', 'Session'),
-    ['@styles']: path.resolve(__dirname, 'src', 'styles')
+    ['@styles']: path.resolve(__dirname, 'src', 'styles'),
+    ['@src']: path.resolve(__dirname, 'src')
   })
 );
