@@ -5,8 +5,13 @@
   height: calc(100vh - #{$dashboard-nav-height});
   width: 100%;
   overflow-y: scroll;
+  .cluster:first-child {
+    margin: 0;
+  }
   .cluster {
+    margin-top: 48px;
     .header {
+      display: block;
       font-family: 'Ubuntu';
       font-size: 2rem;
     }

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { k8sProxy } from '@src/App';
 import { Table, Tag, Button, message } from 'antd';
 
@@ -6,11 +6,22 @@ import { withFirebase } from '@firebase-api';
 
 const { Column } = Table;
 
-class Deployments extends Component {
-  state = { deployments: [], loading: false };
+class Deployments extends PureComponent {
+  state = { deployments: [], loading: false, refresh: false };
 
   componentDidMount() {
     this.getDeployments();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.deployments === null) this.getDeployments();
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.refresh !== prevState.refresh) {
+      return { refresh: nextProps.refresh, deployments: null };
+    }
+    return null;
   }
 
   getDeployments = async () => {

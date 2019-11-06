@@ -21,20 +21,18 @@ class Clusters extends Component {
     this.setState({ selectedRowKeys });
   };
 
-  componentDidMount() {
-    this.props.firebase
-      .clusters()
-      .once('value')
-      .then(snapshot => {
-        const value = snapshot.val();
-        if (!value) return;
-        const clusters = Object.keys(value).map(key => {
-          const { addr, owner } = value[key];
-          return { key, addr, owner };
-        });
+  async componentDidMount() {
+    const { firebase } = this.props;
 
-        this.setState({ clusters, loading: false });
-      });
+    const snapshot = await firebase.clusters().once('value');
+    const value = { ...snapshot.val() };
+
+    const clusters = Object.keys(value).map(key => {
+      const { addr, owner } = value[key];
+      return { key, addr, owner };
+    });
+
+    this.setState({ clusters, loading: false });
   }
 
   render() {

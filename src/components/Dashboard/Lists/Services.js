@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Table, Tag, Button, message } from 'antd';
 
 import { k8sProxy } from '@src/App';
@@ -6,21 +6,39 @@ import { withFirebase } from '@firebase-api';
 
 const { Column } = Table;
 
-class Services extends Component {
-  state = { services: [], loading: false };
+class Services extends PureComponent {
+  state = { services: [], loading: false, refresh: false };
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.getServices();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.services === null) this.getServices();
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.refresh !== prevState.refresh) {
+      return { refresh: nextProps.refresh, services: null };
+    }
+    return null;
+  }
+
+  getServices = async () => {
     const { firebase, cid } = this.props;
 
     try {
       const token = await firebase.auth.currentUser.getIdToken(true);
       const uid = firebase.auth.currentUser.uid;
+
       this.setState({ loading: true });
+
       const response = await k8sProxy.get(
         `/clusters/${cid}/api/v1/namespaces/${uid.toLowerCase()}/services`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       const items = response.data.items;
+
       const services = [];
       for (const service of items) {
         const {
@@ -43,7 +61,7 @@ class Services extends Component {
     } finally {
       this.setState({ loading: false });
     }
-  }
+  };
 
   deleteServiceHandler = async serviceIndex => {
     try {

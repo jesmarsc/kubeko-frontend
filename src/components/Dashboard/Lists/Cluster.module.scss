@@ -1,0 +1,13 @@
+@import '@styles/variables.scss';
+
+.cluster:first-child {
+  margin: 0;
+}
+.cluster {
+  margin-top: 48px;
+  .header {
+    display: block;
+    font-family: 'Ubuntu';
+    font-size: 2rem;
+  }
+}

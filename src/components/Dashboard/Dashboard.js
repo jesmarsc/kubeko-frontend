@@ -17,15 +17,9 @@ class Dashboard extends Component {
       '111.111.111.111',
       '456.456.456.456',
       '123.456.789.123'
-    ],
-    collapsed: false
+    ]
   };
 
-  toggle = () => {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
-  };
   render() {
     return (
       <div className={styles.container}>
