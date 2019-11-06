@@ -18,12 +18,8 @@ class Workload extends Component {
     try {
       const { firebase } = this.props;
       const { uid } = this.context;
-      const snapshot = await firebase
-        .user(uid)
-        .child('deployments')
-        .once('value');
-      const clusters = { ...snapshot.val() };
-      this.setState({ clusters });
+
+      await this.getClusters();
       firebase
         .user(uid)
         .child('deployments')
@@ -45,6 +41,17 @@ class Workload extends Component {
       .child('deployments')
       .off();
   }
+
+  getClusters = async () => {
+    const { firebase } = this.props;
+    const { uid } = this.context;
+    const snapshot = await firebase
+      .user(uid)
+      .child('deployments')
+      .once('value');
+    const clusters = { ...snapshot.val() };
+    this.setState({ clusters });
+  };
 
   deleteNamespaceHandler = async cid => {
     try {
@@ -85,7 +92,7 @@ class Workload extends Component {
     return (
       <div className={styles.container}>
         {tables}
-        <Clusters />
+        <Clusters refresh={this.getClusters} />
       </div>
     );
   }

@@ -67,7 +67,12 @@ class Clusters extends Component {
             rowSelection={rowSelection}
             dataSource={clusters}
             onRow={record => ({ onClick: () => this.selectRow(record) })}
-            footer={() => <UploadForm cid={selectedRowKeys[0]} />}
+            footer={() => (
+              <UploadForm
+                cid={selectedRowKeys[0]}
+                refresh={this.props.refresh}
+              />
+            )}
           >
             <Column title="Address" dataIndex="addr" />
             <Column title="Owner" dataIndex="owner" />

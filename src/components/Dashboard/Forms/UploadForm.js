@@ -35,6 +35,8 @@ class UploadForm extends React.Component {
         }
       );
 
+      this.props.refresh();
+
       message.success('Successfully deployed.', 3);
     } catch (error) {
       message.error(error.message, 3);
