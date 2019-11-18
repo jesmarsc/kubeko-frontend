@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import DashboardNav from './Navbar/DashboardNav';
 import SidePanel from './SidePanel/SidePanel';
-import Content from './Content/Content';
+import ProviderDashboard from './Content/ProviderDashboard';
 import ClusterForm from './Forms/ClusterForm';
 import Workloads from './Content/Workloads';
 import { withAuthorization } from '@session';
@@ -41,7 +41,7 @@ class Dashboard extends Component {
             />
             <Route
               path={this.props.match.url + '/clusters'}
-              render={() => <Content clusters={this.state.clusters} />}
+              component={ProviderDashboard}
             />
           </Switch>
         </div>

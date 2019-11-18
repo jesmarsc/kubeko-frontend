@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { message } from 'antd';
 
 import { k8sProxy } from '@src/App';
-import Clusters from '../Lists/Clusters';
+import ClusterUpload from '../Lists/ClusterUpload';
 import AuthUserContext from '@session/AuthUserContext';
 import { withFirebase } from '@firebase-api';
 import Cluster from '../Lists/Cluster';
@@ -92,7 +92,7 @@ class Workload extends Component {
     return (
       <div className={styles.container}>
         {tables}
-        <Clusters refresh={this.getClusters} />
+        <ClusterUpload refresh={this.getClusters} />
       </div>
     );
   }
