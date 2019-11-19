@@ -6,11 +6,11 @@ import WorkloadForm from './WorkloadForm';
 const { Panel } = Collapse;
 const { Column } = Table;
 
-class Clusters extends Component {
+class WorkloadUpload extends Component {
   state = {
     clusters: [],
     selectedRowKeys: [],
-    loading: true
+    loading: true,
   };
 
   selectRow = record => {
@@ -40,14 +40,14 @@ class Clusters extends Component {
     const rowSelection = {
       selectedRowKeys,
       onChange: this.onSelectedRowKeysChange,
-      type: 'radio'
+      type: 'radio',
     };
     const customPanel = {
       background: '#fafafa',
       border: 0,
       borderRadius: 16,
       marginTop: 32,
-      padding: 0
+      padding: 0,
     };
     return (
       <Collapse
@@ -83,4 +83,4 @@ class Clusters extends Component {
   }
 }
 
-export default withFirebase(Clusters);
+export default withFirebase(WorkloadUpload);

@@ -3,12 +3,13 @@ import { Upload, Button, Icon, message } from 'antd';
 import axios from 'axios';
 
 import { withFirebase } from '@firebase-api';
+import { withVerifiedEmail } from '@session';
 import styles from './WorkloadForm.module.scss';
 
-class UploadForm extends React.Component {
+class WorkloadForm extends React.Component {
   state = {
     fileList: [],
-    uploading: false
+    uploading: false,
   };
 
   handleUpload = async () => {
@@ -30,8 +31,8 @@ class UploadForm extends React.Component {
         {
           headers: {
             'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
@@ -64,7 +65,7 @@ class UploadForm extends React.Component {
     const props = {
       onRemove: this.removeFile,
       beforeUpload: this.beforeUpload,
-      fileList
+      fileList,
     };
 
     return (
@@ -91,4 +92,4 @@ class UploadForm extends React.Component {
   }
 }
 
-export default withFirebase(UploadForm);
+export default withVerifiedEmail(withFirebase(WorkloadForm));
