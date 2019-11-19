@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Icon } from 'antd';
+
+import * as ROUTES from '@constants/routes';
 import styles from './SidePanel.module.scss';
 
 const SidePanel = props => {
@@ -17,7 +19,7 @@ const SidePanel = props => {
           <NavLink
             activeStyle={{ backgroundColor: '#cacaca44' }}
             className={styles.Link}
-            to={props.match.url + '/deployments'}
+            to={ROUTES.WORKLOADS}
             exact
           >
             <span className={styles.Text}>
@@ -30,7 +32,7 @@ const SidePanel = props => {
           <NavLink
             activeStyle={{ backgroundColor: '#cacaca44' }}
             className={styles.Link}
-            to={props.match.url + '/clusters'}
+            to={ROUTES.CLUSTERS}
             exact
           >
             <span className={styles.Text}>

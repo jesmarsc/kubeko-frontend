@@ -22,7 +22,7 @@ const LandingNavAuth = () => {
       <div className={styles.container}>
         <ul className={styles.navMainRight}>
           <li>
-            <Link to={ROUTES.DASH}>
+            <Link to={ROUTES.WORKLOADS}>
               <Button size="large" type="primary">
                 Dashboard
               </Button>

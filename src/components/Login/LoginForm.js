@@ -17,7 +17,7 @@ const LoginFormBase = ({ errors, touched, isSubmitting }) => {
           style={
             errors.email &&
             touched.email && {
-              borderBottom: '2px solid red'
+              borderBottom: '2px solid red',
             }
           }
           type="email"
@@ -75,7 +75,7 @@ const LoginForm = withFormik({
       .doSignInWithEmailAndPassword(values.email, values.password)
       .then(res => {
         resetForm();
-        props.history.push(ROUTES.DASH + '/deployments');
+        props.history.push(ROUTES.WORKLOADS);
       })
       .catch(error => {
         setErrors({ submit: error.message });
@@ -88,8 +88,8 @@ const LoginForm = withFormik({
       .required('Email is required.'),
     password: Yup.string()
       .min(8, 'Password must be atleast 8 characters long.')
-      .required('Password is required.')
-  })
+      .required('Password is required.'),
+  }),
 })(LoginFormBase);
 
 export default withRouter(withFirebase(LoginForm));

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 import DashboardNav from './Navbar/DashboardNav';
 import SidePanel from './SidePanel/SidePanel';
@@ -21,12 +21,16 @@ class Dashboard extends Component {
         <div className={styles.Content}>
           <Switch>
             <Route
-              path={this.props.match.url + '/deployments'}
+              path={this.props.match.url + '/workloads'}
               component={UserDashboard}
             />
             <Route
               path={this.props.match.url + '/clusters'}
               component={ProviderDashboard}
+            />
+            <Redirect
+              to={this.props.match.url + '/workloads'}
+              component={UserDashboard}
             />
           </Switch>
         </div>

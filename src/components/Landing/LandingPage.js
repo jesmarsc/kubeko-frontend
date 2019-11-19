@@ -27,7 +27,7 @@ const Landing = () => {
             <span className={classes.title}>Kubernetes Konekt</span>
             <span className={classes.subtitle}>Cloud. Made simple.</span>
             {authUser ? (
-              <Link to={ROUTES.DASH}>
+              <Link to={ROUTES.WORKLOADS}>
                 <Button icon="form" shape="round" size="large" type="primary">
                   Dashboard
                 </Button>
