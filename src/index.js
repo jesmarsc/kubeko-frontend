@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import Firebase, { FirebaseContext } from '@firebase-api';
+import './styles/reset.scss';
 require('typeface-ubuntu');
 
 ReactDOM.render(

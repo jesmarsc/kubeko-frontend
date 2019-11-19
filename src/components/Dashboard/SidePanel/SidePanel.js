@@ -7,9 +7,9 @@ const SidePanel = props => {
   return (
     <nav className={styles.SidePanel}>
       <div className={styles.LogoContainer}>
-        <span className={styles.Logo}>
-          <strong>Kubeko</strong>
-        </span>
+        <NavLink to={'/'}>
+          <h1 className={styles.Logo}>Kubeko</h1>
+        </NavLink>
       </div>
 
       <ul className={styles.SideMenu}>
