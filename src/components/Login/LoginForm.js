@@ -75,7 +75,7 @@ const LoginForm = withFormik({
       .doSignInWithEmailAndPassword(values.email, values.password)
       .then(res => {
         resetForm();
-        props.history.push(ROUTES.DASH);
+        props.history.push(ROUTES.DASH + '/deployments');
       })
       .catch(error => {
         setErrors({ submit: error.message });
