@@ -36,10 +36,6 @@ class Dashboard extends Component {
               component={Workloads}
             />
             <Route
-              path={this.props.match.url + '/clusters/new'}
-              component={ClusterForm}
-            />
-            <Route
               path={this.props.match.url + '/clusters'}
               component={ProviderDashboard}
             />

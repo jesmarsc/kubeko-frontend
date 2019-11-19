@@ -39,19 +39,6 @@ const SidePanel = props => {
             </span>
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            activeStyle={{ backgroundColor: '#cacaca44' }}
-            className={styles.Link}
-            to={props.match.url + '/clusters/new'}
-            exact
-          >
-            <span className={styles.Text}>
-              <Icon type="form" />
-              <span style={{ marginLeft: '16px' }}>Add Cluster</span>
-            </span>
-          </NavLink>
-        </li>
       </ul>
     </nav>
   );

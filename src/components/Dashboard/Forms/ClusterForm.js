@@ -66,8 +66,7 @@ const ClusterForm = withFormik({
   },
 
   validationSchema: Yup.object().shape({
-    ip: Yup.string()
-      .required('IP address is required.')
+    ip: Yup.string().required('IP address is required.')
   })
 })(ClusterFormBase);
 

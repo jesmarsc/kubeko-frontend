@@ -10,6 +10,7 @@ import { withFirebase } from '@firebase-api';
 import UsersInCluster from '../Lists/UsersInCluster';
 import AuthUserContext from '@session/AuthUserContext';
 import styles from './Content.module.scss';
+import ClusterUpload from '../Lists/ClusterUpload';
 
 const clustersReducer = (clusters, action) => {
   switch (action.type) {
@@ -80,7 +81,12 @@ const ProviderDashboard = React.memo(({ firebase }) => {
     return clusters.map(cid => <UsersInCluster key={cid} cid={cid} />);
   }, [clusters]);
 
-  return <div className={styles.container}>{clusterTables}</div>;
+  return (
+    <div className={styles.container}>
+      {clusterTables}
+      <ClusterUpload />
+    </div>
+  );
 });
 
 export default withFirebase(ProviderDashboard);
