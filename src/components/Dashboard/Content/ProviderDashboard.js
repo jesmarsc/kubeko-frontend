@@ -3,34 +3,19 @@ import React, {
   useEffect,
   useContext,
   useReducer,
-  useMemo,
-  Fragment
+  useMemo
 } from 'react';
 import { withFirebase } from '@firebase-api';
-import AuthUserContext from '@session/AuthUserContext';
-import { Table, Button } from 'antd';
-import styles from './Content.module.scss';
 
-const columns = [
-  {
-    title: 'Users',
-    dataIndex: 'uid'
-  },
-  {
-    title: 'Actions',
-    key: 'actions',
-    render: (text, record) => (
-      <Button type="link" onClick={record.removeUser}>
-        Kick User
-      </Button>
-    )
-  }
-];
+import UsersInCluster from '../Lists/UsersInCluster';
+import AuthUserContext from '@session/AuthUserContext';
+import styles from './Content.module.scss';
 
 const clustersReducer = (clusters, action) => {
   switch (action.type) {
     case 'SET':
-      return action.clusters;
+      const clusters = action.clusters ? action.clusters : {};
+      return Object.keys(clusters);
     case 'ADD':
       return { ...clusters, [action.cid]: true };
     case 'DELETE':
@@ -64,45 +49,13 @@ const requestReducer = (state, action) => {
 const ProviderDashboard = React.memo(({ firebase }) => {
   const { uid } = useContext(AuthUserContext);
 
-  const [clusters, clustersDispatch] = useReducer(clustersReducer, {});
+  const [clusters, clustersDispatch] = useReducer(clustersReducer, []);
 
   // eslint-disable-next-line
   const [request, requestDispatch] = useReducer(requestReducer, {
     error: null,
     isLoading: false
   });
-
-  const getUsersInCluster = useCallback(
-    cid => {
-      return firebase.db
-        .ref('clusters-users')
-        .child(cid)
-        .once('value')
-        .then(snapshot => {
-          return { ...snapshot.val() };
-        });
-    },
-    [firebase]
-  );
-
-  const removeUser = useCallback(
-    async (cid, uid, index) => {
-      try {
-        requestDispatch({ type: 'REQUEST' });
-        const updates = {
-          [`users/${uid}/deployments/${cid}`]: null,
-          [`clusters-users/${cid}/${uid}`]: null
-        };
-
-        await firebase.db.ref().update(updates);
-        clustersDispatch({ type: 'DELETE_USER', cid, index });
-      } catch (error) {
-        console.log(error);
-        requestDispatch({ type: 'ERROR', error });
-      }
-    },
-    [firebase]
-  );
 
   const getClusters = useCallback(async () => {
     try {
@@ -112,57 +65,22 @@ const ProviderDashboard = React.memo(({ firebase }) => {
         .child('clusters')
         .once('value');
 
-      const clusters = { ...snapshot.val() };
-
-      const getUsersRequests = [];
-      for (const cid of Object.keys(clusters)) {
-        getUsersRequests.push(
-          getUsersInCluster(cid).then(users => {
-            clusters[cid] = Object.keys(users).map((uid, index) => ({
-              key: uid,
-              uid,
-              removeUser: () => removeUser(cid, uid, index)
-            }));
-          })
-        );
-      }
-
-      await Promise.all(getUsersRequests);
-
       requestDispatch({ type: 'RESPONSE' });
-      clustersDispatch({ type: 'SET', clusters });
+      clustersDispatch({ type: 'SET', clusters: snapshot.val() });
     } catch (error) {
       requestDispatch({ type: 'ERROR', error });
     }
-  }, [uid, firebase, getUsersInCluster, removeUser]);
+  }, [uid, firebase]);
 
   useEffect(() => {
     getClusters();
   }, [getClusters]);
 
   const clusterTables = useMemo(() => {
-    return Object.keys(clusters).map(cid => {
-      return (
-        <Fragment key={cid}>
-          <h2>
-            <strong>Cluster: {cid}</strong>
-          </h2>
-          <Table
-            locale={{ emptyText: 'No Users' }}
-            size="middle"
-            columns={columns}
-            dataSource={clusters[cid]}
-          />
-        </Fragment>
-      );
-    });
+    return clusters.map(cid => <UsersInCluster key={cid} cid={cid} />);
   }, [clusters]);
 
-  return (
-    <Fragment>
-      <div className={styles.container}>{clusterTables}</div>
-    </Fragment>
-  );
+  return <div className={styles.container}>{clusterTables}</div>;
 });
 
 export default withFirebase(ProviderDashboard);
