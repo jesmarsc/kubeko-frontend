@@ -1,12 +1,20 @@
-import React, { memo, useEffect, useCallback, useReducer } from 'react';
+import React, {
+  memo,
+  useEffect,
+  useCallback,
+  useReducer,
+  useContext,
+  Fragment,
+} from 'react';
 import { Table, Button } from 'antd';
 
 import { withFirebase } from '@firebase-api';
+import { AuthUserContext } from '@session';
 
 const columns = [
   {
     title: 'Users',
-    dataIndex: 'uid'
+    dataIndex: 'uid',
   },
   {
     title: 'Actions',
@@ -15,11 +23,11 @@ const columns = [
       <Button type="link" onClick={record.remove}>
         Kick User
       </Button>
-    )
-  }
+    ),
+  },
 ];
 
-/* users: array of objects */
+/* users: array of objects [{key, uid, remove}] */
 const usersReducer = (users, action) => {
   switch (action.type) {
     case 'SET': {
@@ -41,12 +49,28 @@ const usersReducer = (users, action) => {
 
 const UsersInCluster = memo(({ cid, firebase }) => {
   const [users, usersDispatch] = useReducer(usersReducer, []);
+  const authUser = useContext(AuthUserContext);
+
+  const removeCluster = useCallback(() => {
+    try {
+      const updates = {};
+
+      for (const user of users) {
+        updates[`users/${user.uid}/deployments/${cid}`] = null;
+      }
+      updates[`clusters-users/${cid}`] = null;
+      updates[`clusters/${cid}`] = null;
+      updates[`users/${authUser.uid}/clusters/${cid}`] = null;
+
+      firebase.db.ref().update(updates);
+    } catch (error) {}
+  }, [authUser, firebase, users, cid]);
 
   const removeUser = useCallback(
     uid => {
       const updates = {
         [`users/${uid}/deployments/${cid}`]: null,
-        [`clusters-users/${cid}/${uid}`]: null
+        [`clusters-users/${cid}/${uid}`]: null,
       };
 
       firebase.db.ref().update(updates);
@@ -63,8 +87,7 @@ const UsersInCluster = memo(({ cid, firebase }) => {
     });
 
     clusterUsersRef.on('child_removed', snapshot => {
-      const uid = snapshot.key;
-      usersDispatch({ type: 'DELETE', uid });
+      usersDispatch({ type: 'DELETE', uid: snapshot.key });
     });
 
     return () => {
@@ -75,9 +98,14 @@ const UsersInCluster = memo(({ cid, firebase }) => {
   return (
     <Table
       title={() => (
-        <h2>
-          <strong>Cluster: {cid}</strong>
-        </h2>
+        <Fragment>
+          <h2>
+            <strong>Cluster: {cid}</strong>
+          </h2>
+          <Button icon="delete" type="link" onClick={removeCluster}>
+            Delete Cluster
+          </Button>
+        </Fragment>
       )}
       locale={{ emptyText: 'No Users' }}
       size="middle"

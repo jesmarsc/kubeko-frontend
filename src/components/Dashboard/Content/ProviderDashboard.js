@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useContext,
-  useReducer,
-  useMemo
-} from 'react';
+import React, { useEffect, useContext, useReducer, useMemo } from 'react';
 import { withFirebase } from '@firebase-api';
 
 import UsersInCluster from '../Lists/UsersInCluster';
@@ -14,68 +8,41 @@ import ClusterUpload from '../Forms/ClusterUpload';
 
 const clustersReducer = (clusters, action) => {
   switch (action.type) {
-    case 'SET':
+    case 'SET': {
       const clusters = action.clusters ? action.clusters : {};
       return Object.keys(clusters);
-    case 'ADD':
-      return { ...clusters, [action.cid]: true };
-    case 'DELETE':
-      const { [action.cid]: removed, ...rest } = clusters;
-      return rest;
-    case 'DELETE_USER':
-      const copy = { ...clusters };
-      const users = [...clusters[action.cid]];
-      users.splice(action.index, 1);
-      copy[action.cid] = users;
-      return copy;
-
-    default:
-      throw new Error('Invalid action.type');
-  }
-};
-
-const requestReducer = (state, action) => {
-  switch (action.type) {
-    case 'REQUEST':
-      return { error: null, isLoading: true };
-    case 'RESPONSE':
-      return { error: null, isLoading: false };
-    case 'ERROR':
-      return { error: action.error, isLoading: false };
+    }
+    case 'ADD': {
+      return [...clusters, action.cluster];
+    }
+    case 'DELETE': {
+      return clusters.filter(cluster => cluster !== action.cluster);
+    }
     default:
       throw new Error('Invalid action.type');
   }
 };
 
 const ProviderDashboard = React.memo(({ firebase }) => {
-  const { uid } = useContext(AuthUserContext);
+  const authUser = useContext(AuthUserContext);
 
   const [clusters, clustersDispatch] = useReducer(clustersReducer, []);
 
-  // eslint-disable-next-line
-  const [request, requestDispatch] = useReducer(requestReducer, {
-    error: null,
-    isLoading: false
-  });
-
-  const getClusters = useCallback(async () => {
-    try {
-      requestDispatch({ type: 'REQUEST' });
-      const snapshot = await firebase
-        .user(uid)
-        .child('clusters')
-        .once('value');
-
-      requestDispatch({ type: 'RESPONSE' });
-      clustersDispatch({ type: 'SET', clusters: snapshot.val() });
-    } catch (error) {
-      requestDispatch({ type: 'ERROR', error });
-    }
-  }, [uid, firebase]);
-
   useEffect(() => {
-    getClusters();
-  }, [getClusters]);
+    const clustersRef = firebase.db.ref(`users/${authUser.uid}/clusters`);
+
+    clustersRef.on('child_added', snapshot => {
+      clustersDispatch({ type: 'ADD', cluster: snapshot.key });
+    });
+
+    clustersRef.on('child_removed', snapshot => {
+      clustersDispatch({ type: 'DELETE', cluster: snapshot.key });
+    });
+
+    return () => {
+      clustersRef.off();
+    };
+  }, [authUser, firebase]);
 
   const clusterTables = useMemo(() => {
     return clusters.map(cid => <UsersInCluster key={cid} cid={cid} />);
