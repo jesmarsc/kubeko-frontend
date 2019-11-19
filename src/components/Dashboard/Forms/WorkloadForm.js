@@ -3,7 +3,7 @@ import { Upload, Button, Icon, message } from 'antd';
 import axios from 'axios';
 
 import { withFirebase } from '@firebase-api';
-import styles from './UploadForm.module.scss';
+import styles from './WorkloadForm.module.scss';
 
 class UploadForm extends React.Component {
   state = {

@@ -75,9 +75,9 @@ const UsersInCluster = memo(({ cid, firebase }) => {
   return (
     <Table
       title={() => (
-        <h3>
+        <h2>
           <strong>Cluster: {cid}</strong>
-        </h3>
+        </h2>
       )}
       locale={{ emptyText: 'No Users' }}
       size="middle"

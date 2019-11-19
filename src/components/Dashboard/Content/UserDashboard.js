@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { message } from 'antd';
 
 import { k8sProxy } from '@src/App';
-import DeploymentUpload from '../Lists/DeploymentUpload';
+import WorkloadUpload from '../Forms/WorkloadUpload';
 import AuthUserContext from '@session/AuthUserContext';
 import { withFirebase } from '@firebase-api';
 import Cluster from '../Lists/Cluster';
 
-import styles from './Workloads.module.scss';
+import styles from './Content.module.scss';
 
 class Workload extends Component {
   static contextType = AuthUserContext;
@@ -92,7 +92,7 @@ class Workload extends Component {
     return (
       <div className={styles.container}>
         {tables}
-        <DeploymentUpload refresh={this.getClusters} />
+        <WorkloadUpload refresh={this.getClusters} />
       </div>
     );
   }

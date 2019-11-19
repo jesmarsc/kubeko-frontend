@@ -1,7 +1,7 @@
 import React from 'react';
 import { Collapse, Icon } from 'antd';
 
-import ClusterForm from '../Forms/ClusterForm';
+import ClusterForm from './ClusterForm';
 
 const { Panel } = Collapse;
 

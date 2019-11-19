@@ -10,7 +10,7 @@ import { withFirebase } from '@firebase-api';
 import UsersInCluster from '../Lists/UsersInCluster';
 import AuthUserContext from '@session/AuthUserContext';
 import styles from './Content.module.scss';
-import ClusterUpload from '../Lists/ClusterUpload';
+import ClusterUpload from '../Forms/ClusterUpload';
 
 const clustersReducer = (clusters, action) => {
   switch (action.type) {

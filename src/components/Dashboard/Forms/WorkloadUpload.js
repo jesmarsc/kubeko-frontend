@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Table, Collapse, Icon } from 'antd';
 import { withFirebase } from '@firebase-api';
-import UploadForm from '../Forms/UploadForm';
+import WorkloadForm from './WorkloadForm';
 
 const { Panel } = Collapse;
 const { Column } = Table;
@@ -68,7 +68,7 @@ class Clusters extends Component {
             dataSource={clusters}
             onRow={record => ({ onClick: () => this.selectRow(record) })}
             footer={() => (
-              <UploadForm
+              <WorkloadForm
                 cid={selectedRowKeys[0]}
                 refresh={this.props.refresh}
               />

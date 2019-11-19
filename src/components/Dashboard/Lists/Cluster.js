@@ -4,8 +4,6 @@ import { Button } from 'antd';
 import Deployments from './Deployments';
 import Services from './Services';
 
-import styles from './Cluster.module.scss';
-
 class Cluster extends PureComponent {
   state = { deleting: false, refreshing: false };
 
@@ -28,10 +26,10 @@ class Cluster extends PureComponent {
     const { deleting, refreshing } = this.state;
     const { cid } = this.props;
     return (
-      <div className={styles.cluster} key={cid}>
-        <span className={styles.header}>
+      <div style={{ marginBottom: '32px' }} key={cid}>
+        <h2>
           <strong>Cluster: {cid}</strong>
-        </span>
+        </h2>
         <Button onClick={this.refreshCluster} type="link" icon="sync">
           Refresh
         </Button>

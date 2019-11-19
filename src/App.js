@@ -7,7 +7,6 @@ import LandingPage from './components/Landing';
 import DashboardPage from './components/Dashboard';
 import SignUpPage from './components/SignUp';
 import LoginPage from './components/Login';
-import AdminPage from './components/Admin';
 import { withAuthentication } from './components/Session';
 
 import * as ROUTES from './constants/routes';
@@ -40,7 +39,6 @@ const App = () => (
         <Route path={ROUTES.DASH} component={DashboardPage} />
         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
         <Route path={ROUTES.SIGN_IN} component={LoginPage} />
-        <Route path={ROUTES.ADMIN} component={AdminPage} />
         <Redirect path={'/'} to="/" />
       </Switch>
     </BrowserRouter>

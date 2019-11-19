@@ -4,22 +4,11 @@ import { Route, Switch } from 'react-router-dom';
 import DashboardNav from './Navbar/DashboardNav';
 import SidePanel from './SidePanel/SidePanel';
 import ProviderDashboard from './Content/ProviderDashboard';
-import ClusterForm from './Forms/ClusterForm';
-import Workloads from './Content/Workloads';
+import UserDashboard from './Content/UserDashboard';
 import { withAuthorization } from '@session';
 import styles from './Dashboard.module.scss';
 
 class Dashboard extends Component {
-  state = {
-    clusters: [
-      '123.123.123.123',
-      '245.245.245.245',
-      '111.111.111.111',
-      '456.456.456.456',
-      '123.456.789.123'
-    ]
-  };
-
   render() {
     return (
       <div className={styles.container}>
@@ -33,7 +22,7 @@ class Dashboard extends Component {
           <Switch>
             <Route
               path={this.props.match.url + '/deployments'}
-              component={Workloads}
+              component={UserDashboard}
             />
             <Route
               path={this.props.match.url + '/clusters'}
