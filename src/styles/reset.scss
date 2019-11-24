@@ -1,8 +1,14 @@
 $font-primary: 'Ubuntu', sans-serif;
 
 html {
-  overflow: hidden;
   box-sizing: border-box;
+  font-size: 50%;
+  @media (min-width: 600px) {
+    font-size: 56.25%;
+  }
+  @media (min-width: 1024px) {
+    font-size: 62.5%;
+  }
 }
 
 *,
@@ -11,5 +17,4 @@ html {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
-  text-decoration: none;
 }

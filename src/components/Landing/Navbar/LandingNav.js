@@ -9,11 +9,9 @@ import * as ROUTES from '@constants/routes';
 import styles from './LandingNav.module.css';
 
 const LandingNavbar = () => (
-  <div>
-    <AuthUserContext.Consumer>
-      {authUser => (authUser ? <LandingNavAuth /> : <LandingNavNonAuth />)}
-    </AuthUserContext.Consumer>
-  </div>
+  <AuthUserContext.Consumer>
+    {authUser => (authUser ? <LandingNavAuth /> : <LandingNavNonAuth />)}
+  </AuthUserContext.Consumer>
 );
 
 const LandingNavAuth = () => {
@@ -51,9 +49,7 @@ const LandingNavNonAuth = () => {
           </li>
           <li>
             <Link to={ROUTES.SIGN_UP}>
-              <Button size="large" type="ghost">
-                Sign Up
-              </Button>
+              <Button size="large">Sign Up</Button>
             </Link>
           </li>
         </ul>

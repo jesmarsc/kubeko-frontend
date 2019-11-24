@@ -20,12 +20,12 @@ const Landing = () => {
   return (
     <Fragment>
       <Navbar />
+
       <div className={classes.container}>
-        <div className={classes.background} />
         <header className={classes.header}>
           <div className={classes.wrapper}>
-            <span className={classes.title}>Kubernetes Konekt</span>
-            <span className={classes.subtitle}>Cloud. Made simple.</span>
+            <h1 className={classes.title}>Kubernetes Konekt</h1>
+            <h2 className={classes.subtitle}>Cloud. Made simple.</h2>
             {authUser ? (
               <Link to={ROUTES.WORKLOADS}>
                 <Button icon="form" shape="round" size="large" type="primary">
@@ -43,8 +43,8 @@ const Landing = () => {
           <Lottie
             isClickToPauseDisabled={true}
             style={{
-              maxHeight: '100%',
-              maxWidth: '100%',
+              height: '100%',
+              gridArea: 'b',
             }}
             options={defaultOptions}
           />
