@@ -63,6 +63,7 @@ class WorkloadForm extends React.Component {
   render() {
     const { uploading, fileList } = this.state;
     const props = {
+      accept: '.yaml,.yml',
       onRemove: this.removeFile,
       beforeUpload: this.beforeUpload,
       fileList,

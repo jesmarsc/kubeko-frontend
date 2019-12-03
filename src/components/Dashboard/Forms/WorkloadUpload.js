@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Table, Collapse, Icon } from 'antd';
 import { withFirebase } from '@firebase-api';
 import WorkloadForm from './WorkloadForm';
@@ -68,10 +68,14 @@ class WorkloadUpload extends Component {
             dataSource={clusters}
             onRow={record => ({ onClick: () => this.selectRow(record) })}
             footer={() => (
-              <WorkloadForm
-                cid={selectedRowKeys[0]}
-                refresh={this.props.refresh}
-              />
+              <Fragment>
+                {' '}
+                <p>Select a YAML file representing your workload.</p>
+                <WorkloadForm
+                  cid={selectedRowKeys[0]}
+                  refresh={this.props.refresh}
+                />
+              </Fragment>
             )}
           >
             <Column title="Address" dataIndex="addr" />
